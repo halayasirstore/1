@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storio - Learn English Through Stories</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .bg-gradient-to-r {
+      background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    }
+
+    .from-blue-600 {
+      --tw-gradient-from: #2563eb;
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(37 99 235 / 0));
+    }
+
+    .to-purple-600 {
+      --tw-gradient-to: #9333ea;
+    }
+
+    .from-blue-50 {
+      --tw-gradient-from: #eff6ff;
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(239 246 255 / 0));
+    }
+
+    .via-white {
+      --tw-gradient-stops: var(--tw-gradient-from), #fff, var(--tw-gradient-to);
+    }
+
+    .to-purple-50 {
+      --tw-gradient-to: #faf5ff;
+    }
+
+    .from-blue-500 {
+      --tw-gradient-from: #3b82f6;
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(59 130 246 / 0));
+    }
+
+    .to-blue-600 {
+      --tw-gradient-to: #2563eb;
+    }
+
+    .from-purple-500 {
+      --tw-gradient-from: #a855f7;
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(168 85 247 / 0));
+    }
+
+    .to-purple-600 {
+      --tw-gradient-to: #9333ea;
+    }
+
+    .from-green-500 {
+      --tw-gradient-from: #22c55e;
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(34 197 94 / 0));
+    }
+
+    .to-green-600 {
+      --tw-gradient-to: #16a34a;
+    }
+
+    .backdrop-blur-md {
+      backdrop-filter: blur(12px);
+    }
+
+    .transform {
+      transform: translateX(var(--tw-translate-x, 0)) translateY(var(--tw-translate-y, 0)) rotate(var(--tw-rotate, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1));
+    }
+
+    .hover\:translate-y-1:hover {
+      --tw-translate-y: -0.25rem;
+    }
+
+    .hover\:translate-y-2:hover {
+      --tw-translate-y: -0.5rem;
+    }
+
+    .hover\:-translate-y-1:hover {
+      --tw-translate-y: -0.25rem;
+    }
+
+    .hover\:-translate-y-2:hover {
+      --tw-translate-y: -0.5rem;
+    }
+
+    .transition-all {
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
+    }
+
+    .transition-colors {
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+
+    .transition-shadow {
+      transition-property: box-shadow;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+
+    .bg-clip-text {
+      background-clip: text;
+    }
+
+    .text-transparent {
+      color: transparent;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+  <!-- Header -->
+  <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="showView('home')">
+          <i class="fas fa-book-open w-8 h-8 text-blue-600"></i>
+          <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Storio
+          </h1>
+        </div>
+        <nav class="flex gap-6">
+          <button id="nav-home" onclick="showView('home')"
+            class="px-4 py-2 transition-colors text-blue-600 font-semibold">
+            Home
+          </button>
+          <button id="nav-stories" onclick="showView('stories')"
+            class="px-4 py-2 transition-colors text-gray-700 hover:text-blue-600">
+            Stories
+          </button>
+          <button id="nav-progress" onclick="showView('progress')"
+            class="px-4 py-2 transition-colors text-gray-700 hover:text-blue-600">
+            Progress
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Home View -->
+  <section id="home-view" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl font-bold text-gray-900 mb-6">
+        Learn English Through
+        <span class="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          Engaging Stories
+        </span>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        تعلم الإنجليزية من خلال قصص ممتعة مع ترجمة عربية فورية وتمارين تفاعلية لبناء المفردات
+      </p>
+      <button onclick="showView('stories')"
+        class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all">
+        Start Learning Now
+        <i class="fas fa-chevron-right w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+      <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+          <i class="fas fa-book-open w-6 h-6 text-blue-600"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Interactive Stories</h3>
+        <p class="text-gray-600">
+          قصص تفاعلية مع ترجمة فورية للعربية
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+          <i class="fas fa-sparkles w-6 h-6 text-purple-600"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Vocabulary Building</h3>
+        <p class="text-gray-600">
+          تمارين تفاعلية لبناء المفردات
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+          <i class="fas fa-bullseye w-6 h-6 text-green-600"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Track Progress</h3>
+        <p class="text-gray-600">
+          تتبع تقدمك وإنجازاتك
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow-md text-center">
+        <div class="text-4xl font-bold text-blue-600 mb-2" id="stories-count">0</div>
+        <div class="text-gray-600">Stories Available</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-md text-center">
+        <div class="text-4xl font-bold text-purple-600 mb-2" id="vocabulary-count">0</div>
+        <div class="text-gray-600">Vocabulary Words</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-md text-center">
+        <div class="text-4xl font-bold text-green-600 mb-2">3</div>
+        <div class="text-gray-600">Exercise Types</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-md text-center">
+        <div class="text-4xl font-bold text-orange-600 mb-2">100%</div>
+        <div class="text-gray-600">Free to Use</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories View -->
+  <section id="stories-view" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 hidden">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Choose Your Story</h2>
+      <p class="text-lg text-gray-600">اختر قصتك</p>
+    </div>
+
+    <div id="stories-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Stories will be populated here -->
+    </div>
+  </section>
+
+  <!-- Story Reader View -->
+  <section id="reader-view" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 hidden">
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <h2 id="reader-title" class="text-2xl font-bold text-gray-900"></h2>
+          <button onclick="closeReader()" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+      </div>
+      <div class="p-6">
+        <div id="reader-content" class="prose max-w-none">
+          <!-- Story content will be populated here -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vocabulary Exercise View -->
+  <section id="exercises-view" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 hidden">
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <h2 id="exercise-title" class="text-2xl font-bold text-gray-900"></h2>
+          <button onclick="closeExercise()" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+      </div>
+      <div class="p-6">
+        <div id="exercise-content">
+          <!-- Exercise content will be populated here -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress View -->
+  <section id="progress-view" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 hidden">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">Your Progress</h2>
+      <p class="text-lg text-gray-600">تقدمك</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+      <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-8 rounded-2xl shadow-xl text-white">
+        <i class="fas fa-trophy w-12 h-12 mb-4 opacity-80"></i>
+        <div class="text-5xl font-bold mb-2" id="total-points">0</div>
+        <div class="text-blue-100 text-lg">Total Points</div>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-8 rounded-2xl shadow-xl text-white">
+        <i class="fas fa-book-open w-12 h-12 mb-4 opacity-80"></i>
+        <div class="text-5xl font-bold mb-2" id="stories-completed">0</div>
+        <div class="text-purple-100 text-lg">Stories Completed</div>
+      </div>
+
+      <div class="bg-gradient-to-br from-green-500 to-green-600 p-8 rounded-2xl shadow-xl text-white">
+        <i class="fas fa-chart-line w-12 h-12 mb-4 opacity-80"></i>
+        <div class="text-5xl font-bold mb-2" id="words-learned">0</div>
+        <div class="text-green-100 text-lg">Words Learned</div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6">Story Progress</h3>
+      <div id="progress-list" class="space-y-4">
+        <!-- Progress items will be populated here -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Mock data
+    const stories = [
+      {
+        id: 1,
+        title: "The Little Prince",
+        titleAr: "الأمير الصغير",
+        level: "beginner",
+        category: "Fiction",
+        content: "Once upon a time, there was a little prince who lived on a planet hardly bigger than himself. He had three volcanoes, two active and one extinct. He also had a flower. The little prince loved his flower very much, but she was very vain and demanding. One day, the little prince decided to leave his planet and explore the universe. He visited several planets, each with a different inhabitant. On the first planet, he met a king who claimed to rule over everything. On the second planet, he met a conceited man who wanted everyone to admire him. On the third planet, he met a drunkard who was ashamed of drinking. On the fourth planet, he met a businessman who was too busy to even look up at the sky. On the fifth planet, he met a lamplighter who followed a strange routine. Finally, he arrived on Earth, where he met a fox who taught him about friendship and love. The fox told the little prince that what is essential is invisible to the eye, and that one can only see clearly with the heart. The little prince realized that he loved his flower and decided to return to his planet.",
+        vocabulary: [
+          { word: "volcano", translation: "بركان", example: "The volcano erupted with lava." },
+          { word: "vain", translation: "مغرور", example: "She was too vain to admit her mistake." },
+          { word: "demanding", translation: "متطلب", example: "The job was demanding but rewarding." },
+          { word: "conceited", translation: "مغتر بنفسه", example: "He was too conceited to listen to advice." },
+          { word: "essential", translation: "أساسي", example: "Water is essential for life." }
+        ]
+      },
+      {
+        id: 2,
+        title: "The Tortoise and the Hare",
+        titleAr: "الأرنب والسلحفاة",
+        level: "beginner",
+        category: "Fable",
+        content: "Once upon a time, there was a hare who was always boasting about how fast he could run. He would tease the tortoise for being so slow. One day, the tortoise had enough and challenged the hare to a race. The hare laughed and accepted the challenge, confident that he would win easily. The race began, and the hare sprinted ahead, leaving the tortoise far behind. After running for a while, the hare looked back and saw that the tortoise was nowhere in sight. Feeling overconfident, the hare decided to take a nap under a tree, thinking he had plenty of time to finish the race. Meanwhile, the tortoise kept moving slowly but steadily, never stopping. When the hare woke up, he was shocked to see the tortoise near the finish line. The hare ran as fast as he could, but it was too late. The tortoise had already won the race. The moral of the story is that slow and steady wins the race.",
+        vocabulary: [
+          { word: "boasting", translation: "تباهي", example: "He was always boasting about his achievements." },
+          { word: "tease", translation: "يسخر من", example: "Don't tease your little sister." },
+          { word: "challenged", translation: "تحدى", example: "She challenged him to a game of chess." },
+          { word: "sprinted", translation: "ركض بسرعة", example: "He sprinted to catch the bus." },
+          { word: "overconfident", translation: "مبالغ في الثقة", example: "His overconfident attitude led to his downfall." }
+        ]
+      },
+      {
+        id: 3,
+        title: "The Lion and the Mouse",
+        titleAr: "الأسد والفأر",
+        level: "intermediate",
+        category: "Fable",
+        content: "One day, a lion was sleeping in the jungle when a little mouse started running up and down his body. The lion woke up in anger and was about to kill the mouse with his paw. The mouse begged for mercy and promised to repay the lion's kindness if he let him go. The lion laughed at the idea of a tiny mouse helping a mighty lion, but he let the mouse go anyway. A few days later, hunters came to the jungle and set a trap for the lion. The lion was caught in a net and couldn't free himself. He roared in frustration, and the little mouse heard his cries. The mouse ran to the lion and started gnawing at the ropes of the net with his sharp teeth. Soon, the lion was free. The lion thanked the mouse and realized that even the smallest creatures can help the mightiest. The moral of the story is that kindness is never wasted, and even the weak can help the strong.",
+        vocabulary: [
+          { word: "mercy", translation: "رحمة", example: "The judge showed mercy to the first-time offender." },
+          { word: "mighty", translation: "قوي", example: "The mighty elephant can lift heavy logs." },
+          { word: "hunters", translation: "صيادون", example: "The hunters tracked the deer through the forest." },
+          { word: "frustration", translation: "إحباط", example: "He screamed in frustration when he couldn't open the jar." },
+          { word: "gnawing", translation: "قضم", example: "The mouse was gnawing on a piece of cheese." }
+        ]
+      },
+      {
+        id: 4,
+        title: "The Ant and the Grasshopper",
+        titleAr: "النملة والجندب",
+        level: "intermediate",
+        category: "Fable",
+        content: "In a field one summer's day, a grasshopper was hopping about, chirping and singing to its heart's content. An ant passed by, struggling to carry an ear of corn to its nest. 'Why not come and chat with me,' said the grasshopper, 'instead of working so hard?' 'I'm helping to lay up food for the winter,' said the ant, 'and I recommend you to do the same.' 'Why bother about winter?' said the grasshopper. 'We have plenty of food now.' The ant shrugged its shoulders and went on its way. When winter came, the grasshopper had no food and found itself dying of hunger. While it saw the ants distributing corn and grain from the stores they had collected in the summer. Then the grasshopper knew: It is best to prepare for the days of necessity.",
+        vocabulary: [
+          { word: "chirping", translation: "صريصرة", example: "The birds were chirping in the morning." },
+          { word: "struggling", translation: "يكافح", example: "He was struggling to carry the heavy box." },
+          { word: "necessity", translation: "ضرورة", example: "Water is a basic necessity of life." },
+          { word: "distributing", translation: "توزيع", example: "The teacher was distributing the exam papers." },
+          { word: "collected", translation: "جمع", example: "She collected stamps from around the world." }
+        ]
+      },
+      {
+        id: 5,
+        title: "The Fox and the Grapes",
+        titleAr: "الثعلب والعنب",
+        level: "advanced",
+        category: "Fable",
+        content: "One hot summer's day, a fox was strolling through an orchard when he spotted a bunch of grapes ripening on a high branch. 'Just the thing to quench my thirst,' he thought. Drawing back a few paces, he took a run and jumped, but just missed the bunch. Turning round again with a one, two, three, he jumped up, but with no greater success. Again and again he tried, but in vain. Now he sat down and looked at the grapes in disgust. 'What a fool I am,' he said. 'Here I am wearing myself out to get a bunch of sour grapes that are not worth gaping for.' And off he went very much scorned by the little birds who heard him. This fable teaches us that it is easy to despise what you cannot get.",
+        vocabulary: [
+          { word: "orchard", translation: "بستان", example: "We picked apples in the orchard." },
+          { word: "quench", translation: "يروي", example: "Drink this water to quench your thirst." },
+          { word: "disgust", translation: "اشمئزاز", example: "She looked at the dirty room with disgust." },
+          { word: "scorned", translation: "ازدرى", example: "He was scorned for his cowardice." },
+          { word: "despise", translation: "يحتقر", example: "Don't despise those who are less fortunate." }
+        ]
+      },
+      {
+        id: 6,
+        title: "The Boy Who Cried Wolf",
+        titleAr: "الولد الذي كذب",
+        level: "advanced",
+        category: "Fable",
+        content: "There once was a shepherd boy who was bored as he sat on the hillside watching the village sheep. To amuse himself, he took a great breath and sang out, 'Wolf! Wolf! The wolf is chasing the sheep!' The villagers came running up the hill to help the boy drive the wolf away. But when they arrived, they found no wolf. The boy laughed at the sight of their angry faces. A few days later, the boy played the trick again, and again the villagers ran to help. Again, they found no wolf. Later, the boy saw a real wolf prowling about his flock. Alarmed, he leaped to his feet and sang out as loudly as he could, 'Wolf! Wolf!' But the villagers thought he was trying to fool them again, and so they didn't come. At sunset, the boy went home in tears. When the villagers asked why he was crying, he replied, 'There really was a wolf here! The flock has scattered! I cried out, 'Wolf!' but you didn't come.' An old man tried to comfort the boy, saying, 'Nobody believes a liar, even when he is telling the truth.'",
+        vocabulary: [
+          { word: "shepherd", translation: "راعي", example: "The shepherd guided his sheep through the valley." },
+          { word: "amuse", translation: "يسلي", example: "The magician amused the children with his tricks." },
+          { word: "prowling", translation: "يتجول", example: "The cat was prowling around the house at night." },
+          { word: "alarmed", translation: "قلق", example: "She was alarmed by the strange noise downstairs." },
+          { word: "scattered", translation: "تشتت", example: "The wind scattered the leaves across the lawn." }
+        ]
+      }
+    ];
+
+    // User progress data
+    const userProgress = {
+      totalPoints: 150,
+      storiesCompleted: [1, 3],
+      vocabularyLearned: ["volcano", "vain", "boasting", "tease", "mercy", "mighty", "chirping", "struggling"]
+    };
+
+    // Current view state
+    let currentView = 'home';
+    let selectedStory = null;
+
+    // Initialize the app
+    document.addEventListener('DOMContentLoaded', function () {
+      updateStats();
+      renderStories();
+      renderProgress();
+    });
+
+    // Update statistics
+    function updateStats() {
+      document.getElementById('stories-count').textContent = stories.length;
+
+      const totalVocabulary = stories.reduce((acc, story) => acc + story.vocabulary.length, 0);
+      document.getElementById('vocabulary-count').textContent = totalVocabulary;
+
+      document.getElementById('total-points').textContent = userProgress.totalPoints;
+      document.getElementById('stories-completed').textContent = userProgress.storiesCompleted.length;
+      document.getElementById('words-learned').textContent = userProgress.vocabularyLearned.length;
+    }
+
+    // Render stories
+    function renderStories() {
+      const storiesGrid = document.getElementById('stories-grid');
+      storiesGrid.innerHTML = '';
+
+      stories.forEach(story => {
+        const isCompleted = userProgress.storiesCompleted.includes(story.id);
+        const storyCard = document.createElement('div');
+        storyCard.className = 'bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 overflow-hidden';
+
+        const levelColor = story.level === 'beginner' ? 'bg-green-500' :
+          story.level === 'intermediate' ? 'bg-yellow-500' : 'bg-red-500';
+
+        const levelBadgeColor = story.level === 'beginner' ? 'bg-green-100 text-green-700' :
+          story.level === 'intermediate' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700';
+
+        const readingTime = Math.ceil(story.content.split(' ').length / 200);
+
+        storyCard.innerHTML = `
+                    <div class="h-2 ${levelColor}"></div>
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-1">${story.title}</h3>
+                                <p class="text-lg text-gray-600">${story.titleAr}</p>
+                            </div>
+                            ${isCompleted ? `
+                                <div class="bg-green-100 p-2 rounded-full">
+                                    <i class="fas fa-trophy w-5 h-5 text-green-600"></i>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold ${levelBadgeColor}">
+                                ${story.level}
+                            </span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
+                                ${story.category}
+                            </span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                            ${story.content.substring(0, 150)}...
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-6">
+                            <span>${story.vocabulary.length} words</span>
+                            <span>${readingTime} min read</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button
+                                onclick="handleStorySelect(${story.id})"
+                                class="flex-1 flex items-center justify-center gap-2 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                            >
+                                <i class="fas fa-book w-4 h-4"></i>
+                                Read Story
+                            </button>
+                            <button
+                                onclick="handleExerciseStart(${story.id})"
+                                class="flex-1 flex items-center justify-center gap-2 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                            >
+                                <i class="fas fa-bolt w-4 h-4"></i>
+                                Practice
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+        storiesGrid.appendChild(storyCard);
+      });
+    }
+
+    // Render progress
+    function renderProgress() {
+      const progressList = document.getElementById('progress-list');
+      progressList.innerHTML = '';
+
+      stories.forEach(story => {
+        const completed = userProgress.storiesCompleted.includes(story.id);
+        const vocabularyProgress = story.vocabulary.filter(v =>
+          userProgress.vocabularyLearned.includes(v.word)
+        ).length;
+        const progress = story.vocabulary.length > 0 ? (vocabularyProgress / story.vocabulary.length) * 100 : 0;
+
+        const progressItem = document.createElement('div');
+        progressItem.className = 'border border-gray-200 rounded-lg p-6';
+
+        progressItem.innerHTML = `
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900">${story.title}</h4>
+                            <p class="text-sm text-gray-600">${story.titleAr}</p>
+                        </div>
+                        ${completed ? `
+                            <div class="flex items-center gap-2 text-green-600">
+                                <i class="fas fa-trophy w-5 h-5"></i>
+                                <span class="font-semibold">Completed</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="mb-2">
+                        <div class="flex items-center justify-between text-sm text-gray-600 mb-1">
+                            <span>Vocabulary Progress</span>
+                            <span>${vocabularyProgress} / ${story.vocabulary.length} words</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div
+                                class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all"
+                                style="width: ${progress}%"
+                            ></div>
+                        </div>
+                    </div>
+                `;
+
+        progressList.appendChild(progressItem);
+      });
+    }
+
+    // Show view
+    function showView(view) {
+      // Hide all views
+      document.getElementById('home-view').classList.add('hidden');
+      document.getElementById('stories-view').classList.add('hidden');
+      document.getElementById('reader-view').classList.add('hidden');
+      document.getElementById('exercises-view').classList.add('hidden');
+      document.getElementById('progress-view').classList.add('hidden');
+
+      // Update navigation
+      document.getElementById('nav-home').className = view === 'home' ?
+        'px-4 py-2 transition-colors text-blue-600 font-semibold' :
+        'px-4 py-2 transition-colors text-gray-700 hover:text-blue-600';
+
+      document.getElementById('nav-stories').className = view === 'stories' ?
+        'px-4 py-2 transition-colors text-blue-600 font-semibold' :
+        'px-4 py-2 transition-colors text-gray-700 hover:text-blue-600';
+
+      document.getElementById('nav-progress').className = view === 'progress' ?
+        'px-4 py-2 transition-colors text-blue-600 font-semibold' :
+        'px-4 py-2 transition-colors text-gray-700 hover:text-blue-600';
+
+      // Show selected view
+      switch (view) {
+        case 'home':
+          document.getElementById('home-view').classList.remove('hidden');
+          break;
+        case 'stories':
+          document.getElementById('stories-view').classList.remove('hidden');
+          break;
+        case 'reader':
+          document.getElementById('reader-view').classList.remove('hidden');
+          break;
+        case 'exercises':
+          document.getElementById('exercises-view').classList.remove('hidden');
+          break;
+        case 'progress':
+          document.getElementById('progress-view').classList.remove('hidden');
+          break;
+      }
+
+      currentView = view;
+    }
+
+    // Handle story selection
+    function handleStorySelect(storyId) {
+      selectedStory = stories.find(s => s.id === storyId);
+      if (selectedStory) {
+        document.getElementById('reader-title').textContent = selectedStory.title;
+
+        // Format story content with vocabulary highlights
+        let formattedContent = selectedStory.content;
+        selectedStory.vocabulary.forEach(vocab => {
+          const regex = new RegExp(`\\b${vocab.word}\\b`, 'gi');
+          formattedContent = formattedContent.replace(regex,
+            `<span class="relative group cursor-pointer text-blue-600 font-semibold">${vocab.word}
+                            <span class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                                ${vocab.translation}
+                            </span>
+                        </span>`
+          );
+        });
+
+        document.getElementById('reader-content').innerHTML = `
+                    <div class="mb-6">
+                        <p class="text-lg text-gray-600">${selectedStory.titleAr}</p>
+                        <div class="flex gap-2 mt-2">
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold ${selectedStory.level === 'beginner' ? 'bg-green-100 text-green-700' :
+            selectedStory.level === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
+              'bg-red-100 text-red-700'
+          }">
+                                ${selectedStory.level}
+                            </span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
+                                ${selectedStory.category}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="prose max-w-none">
+                        <p class="text-gray-700 leading-relaxed">${formattedContent}</p>
+                    </div>
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Vocabulary</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            ${selectedStory.vocabulary.map(vocab => `
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-semibold text-gray-900">${vocab.word}</h4>
+                                        <span class="text-gray-600">${vocab.translation}</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 italic">${vocab.example}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end">
+                        <button onclick="markStoryCompleted(${selectedStory.id})" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                            Mark as Completed
+                        </button>
+                    </div>
+                `;
+
+        showView('reader');
+      }
+    }
+
+    // Handle exercise start
+    function handleExerciseStart(storyId) {
+      selectedStory = stories.find(s => s.id === storyId);
+      if (selectedStory) {
+        document.getElementById('exercise-title').textContent = `Vocabulary Exercise: ${selectedStory.title}`;
+
+        // Create a simple vocabulary matching exercise
+        const shuffledVocab = [...selectedStory.vocabulary].sort(() => Math.random() - 0.5);
+        const shuffledTranslations = [...selectedStory.vocabulary].sort(() => Math.random() - 0.5);
+
+        document.getElementById('exercise-content').innerHTML = `
+                    <div class="mb-6">
+                        <p class="text-gray-600">Match the English words with their Arabic translations.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-4">English Words</h3>
+                            <div class="space-y-3">
+                                ${shuffledVocab.map((vocab, index) => `
+                                    <div class="border border-gray-200 rounded-lg p-3">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-medium">${vocab.word}</span>
+                                            <select class="border border-gray-300 rounded px-3 py-1" id="select-${index}">
+                                                <option value="">Select translation</option>
+                                                ${shuffledTranslations.map(t => `
+                                                    <option value="${t.word}">${t.translation}</option>
+                                                `).join('')}
+                                            </select>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-4">Vocabulary in Context</h3>
+                            <div class="space-y-3">
+                                ${shuffledVocab.slice(0, 3).map(vocab => `
+                                    <div class="border border-gray-200 rounded-lg p-3">
+                                        <p class="text-sm text-gray-600 italic">${vocab.example}</p>
+                                        <p class="mt-2 text-sm text-gray-500">What does "${vocab.word}" mean in this sentence?</p>
+                                        <input type="text" class="mt-2 w-full border border-gray-300 rounded px-3 py-1" placeholder="Your answer">
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex justify-end gap-4">
+                        <button onclick="checkExercise()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            Check Answers
+                        </button>
+                        <button onclick="closeExercise()" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors">
+                            Close
+                        </button>
+                    </div>
+                `;
+
+        showView('exercises');
+      }
+    }
+
+    // Check exercise answers
+    function checkExercise() {
+      let correct = 0;
+      const total = selectedStory.vocabulary.length;
+
+      selectedStory.vocabulary.forEach((vocab, index) => {
+        const select = document.getElementById(`select-${index}`);
+        if (select && select.value === vocab.word) {
+          correct++;
+          select.parentElement.parentElement.classList.add('bg-green-50');
+        } else if (select) {
+          select.parentElement.parentElement.classList.add('bg-red-50');
+        }
+      });
+
+      // Show results
+      const resultsDiv = document.createElement('div');
+      resultsDiv.className = 'mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg';
+      resultsDiv.innerHTML = `
+                <h3 class="font-semibold text-blue-900 mb-2">Exercise Results</h3>
+                <p class="text-blue-700">You got ${correct} out of ${total} correct.</p>
+                <p class="text-blue-700">Great job! Keep practicing to improve your vocabulary.</p>
+            `;
+
+      document.getElementById('exercise-content').appendChild(resultsDiv);
+
+      // Update user progress
+      userProgress.totalPoints += correct * 10;
+      updateStats();
+    }
+
+    // Mark story as completed
+    function markStoryCompleted(storyId) {
+      if (!userProgress.storiesCompleted.includes(storyId)) {
+        userProgress.storiesCompleted.push(storyId);
+        userProgress.totalPoints += 50;
+
+        // Add vocabulary to learned list
+        const story = stories.find(s => s.id === storyId);
+        if (story) {
+          story.vocabulary.forEach(vocab => {
+            if (!userProgress.vocabularyLearned.includes(vocab.word)) {
+              userProgress.vocabularyLearned.push(vocab.word);
+            }
+          });
+        }
+
+        updateStats();
+        renderProgress();
+
+        // Show completion message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+        messageDiv.textContent = 'Story completed! You earned 50 points.';
+        document.body.appendChild(messageDiv);
+
+        setTimeout(() => {
+          messageDiv.remove();
+        }, 3000);
+      }
+    }
+
+    // Close reader
+    function closeReader() {
+      showView('stories');
+      selectedStory = null;
+    }
+
+    // Close exercise
+    function closeExercise() {
+      showView('stories');
+      selectedStory = null;
+    }
+  </script>
+</body>
+
+</html>
